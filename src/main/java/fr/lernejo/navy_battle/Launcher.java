@@ -39,7 +39,7 @@ public class Launcher {
         try {
             game.set_turn(true); // the client starts the game
             game.setOpponentAddress(args[1]);
-            Utils.PostRequest(args[1] + "/api/game/start", "{\"id\":\"1\", \"url\":\"http://localhost:" + args[0] + "\", \"message\":\"hello\"}");
+            Utils.PostRequest(args[1] + "/api/game/start", "{\"id\":\"1\", \"url\":\"http://localhost:" + args[0] + "\", \"message\":\"May the best code win !\"}");
         } catch(Exception e) {
             e.printStackTrace();
         }
