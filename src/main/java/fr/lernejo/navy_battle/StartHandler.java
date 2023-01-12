@@ -25,7 +25,7 @@ public class StartHandler implements HttpHandler
 
             game.newGame().setOpponentAddress(url);
 
-            String body = "{\"id\": \"10\", \"url\": \"" + this.game.getOwnAddress() + "\", \"message\": \"hello\"}";
+            String body = "{\"id\": \"10\", \"url\": \"" + this.game.getOwnAddress() + "\", \"message\": \"May the best code win !\"}";
             Utils.sendResponse(t, 202, body);
         }
         else Utils.sendResponse(t, 404, "Not Found");
