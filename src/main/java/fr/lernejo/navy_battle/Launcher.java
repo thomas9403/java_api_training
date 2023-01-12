@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 public class Launcher {
     public static void main(String[] args) {
         if (args.length == 0 || args.length > 2) {
-            System.out.println("Usage : {HTTP Port} [Server Address]"); return;
+            System.out.println("Listen"); return;
         }
         GameState game = new GameState("http://localhost:" + Integer.parseInt(args[0]));
         Server(game);
