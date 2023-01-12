@@ -88,4 +88,14 @@ class FireHandlerTest {
         Assertions.assertThat(consequence).isEqualTo("hit");
     }
 
+    @Test
+    void test_cellcoordinates(){
+        String cell = "A1";
+        String[] cellCoordinates = cell.split("");
+        int x = cellCoordinates[0].charAt(0) - 'A';
+        int y = Integer.parseInt(cellCoordinates[1]) - 1;
+        Assertions.assertThat(x).isEqualTo(0);
+        Assertions.assertThat(y).isEqualTo(0);
+    }
+
 }
