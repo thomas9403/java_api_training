@@ -8,8 +8,8 @@ class Board {
     enum State {FREE, FIRED, HIT}
     enum FireResult {MISS, HIT, SUNK}
 
-    private State[][] cells = new State[10][10];
-    private List<Ship> ships = new ArrayList<>();
+    final State[][] cells = new State[10][10];
+    final List<Ship> ships = new ArrayList<>();
 
     Board() {
         for (State[] row : cells) {
