@@ -15,4 +15,14 @@ public record BoardPosition(int x, int y) {
     public String toString() {
         return "(" + this.x + "," + this.y + ")";
     }
+
+    //function getX()
+    public int getX(){
+        return this.x;
+    }
+
+    //function getY()
+    public int getY(){
+        return this.y;
+    }
 }

@@ -11,19 +11,14 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LauncherTest {
-    @Test
-    void wrong_arg(){
-        assertThrows(NumberFormatException.class, ()->{
-            Launcher.main(new String[]{"azert"});
-        });
-    }
+class BoardPositionTest {
 
     @Test
-    void no_arg(){
-        assertThrows(NumberFormatException.class, ()->{
-            Launcher.main(new String[]{""});
-        });
+    void random_pos(){
+        GameState game = new GameState("http://localhost:1234");
+        BoardPosition pos = Launcher.RandomPos(game);
+        Assertions.assertThat(pos.getX()).isBetween(0, 9);
+        Assertions.assertThat(pos.getY()).isBetween(0, 9);
     }
 
 }
