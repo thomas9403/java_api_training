@@ -1,6 +1,10 @@
 package fr.lernejo.navy_battle;
+import java.net.InetSocketAddress;
 import java.net.URI;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.net.httpserver.HttpServer;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +12,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Random;
+import java.util.concurrent.Executors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,22 +30,6 @@ class LauncherTest {
             Launcher.main(new String[]{""});
         });
     }
-
-
-    //public static void main(String[] args) {
-        //if (args.length == 0 || args.length > 2) {
-          //  System.out.println("Listen"); return;
-        //}
-        //GameState game = new GameState("http://localhost:" + Integer.parseInt(args[0]));
-        //Server(game);
-        //if (args.length == 2) Client(game, args);
-        //while (!game.is_game_over()) {
-            //if (game.get_turn()) FireProcedure(game);
-           // try { Thread.sleep(2500); }
-         // }
-     //   System.out.println("Game is Over!");
-   // }
-
     @Test
     //tester GameState game = new GameState("http://localhost:" + Integer.parseInt(args[0]));
     void test_gamestate(){
