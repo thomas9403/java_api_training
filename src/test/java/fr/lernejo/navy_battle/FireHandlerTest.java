@@ -42,4 +42,19 @@ class FireHandlerTest {
         Assertions.assertThat(cell).isEqualTo("A1");
     }
 
+    @Test
+    void verify_response(){
+        GameState game = new GameState("http://localhost:1234");
+        game.set_turn(true);
+        game.set_game_over(false);
+        String cell = "A1";
+        String[] cellCoordinates = cell.split("");
+        int x = cellCoordinates[0].charAt(0) - 'A';
+        int y = Integer.parseInt(cellCoordinates[1]) - 1;
+        String consequence = game.takeFireFromEnemy(x, y);
+        boolean shipLeft = game.check_ships_left();
+        String response = "{\"consequence\": \"" + consequence + "\", \"shipLeft\": " + shipLeft + "}";
+        Assertions.assertThat(response).isEqualTo("{\"consequence\": \"hit\", \"shipLeft\": true}");
+    }
+
 }
