@@ -57,4 +57,35 @@ class FireHandlerTest {
         Assertions.assertThat(response).isEqualTo("{\"consequence\": \"hit\", \"shipLeft\": true}");
     }
 
+    //boolean shipLeft = this.game.check_ships_left();
+
+    @Test
+    void check_ships_left(){
+        GameState game = new GameState("http://localhost:1234");
+        game.set_turn(true);
+        game.set_game_over(false);
+        String cell = "A1";
+        String[] cellCoordinates = cell.split("");
+        int x = cellCoordinates[0].charAt(0) - 'A';
+        int y = Integer.parseInt(cellCoordinates[1]) - 1;
+        String consequence = game.takeFireFromEnemy(x, y);
+        boolean shipLeft = game.check_ships_left();
+        Assertions.assertThat(shipLeft).isEqualTo(true);
+    }
+
+    //String consequence = this.game.takeFireFromEnemy(x, y);
+
+    @Test
+    void takeFireFromEnemy(){
+        GameState game = new GameState("http://localhost:1234");
+        game.set_turn(true);
+        game.set_game_over(false);
+        String cell = "A1";
+        String[] cellCoordinates = cell.split("");
+        int x = cellCoordinates[0].charAt(0) - 'A';
+        int y = Integer.parseInt(cellCoordinates[1]) - 1;
+        String consequence = game.takeFireFromEnemy(x, y);
+        Assertions.assertThat(consequence).isEqualTo("hit");
+    }
+
 }
