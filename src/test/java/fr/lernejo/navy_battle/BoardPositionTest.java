@@ -21,4 +21,17 @@ class BoardPositionTest {
         Assertions.assertThat(pos.getY()).isBetween(0, 9);
     }
 
+    @Test
+    void to_string(){
+        BoardPosition pos = new BoardPosition(1, 2);
+        Assertions.assertThat(pos.toString()).isEqualTo("(1,2)");
+    }
+
+    @Test
+    void equals(){
+        BoardPosition pos = new BoardPosition(1, 2);
+        BoardPosition pos2 = new BoardPosition(1, 2);
+        Assertions.assertThat(pos.equals(pos2)).isTrue();
+    }
+
 }
