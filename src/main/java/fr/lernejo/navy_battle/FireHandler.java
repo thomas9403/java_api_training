@@ -31,10 +31,7 @@ public class FireHandler implements HttpHandler
                 game.set_turn(true);
                 Launcher.FireProcedure(game);
             }
-        }
-        else {
-            Utils.sendResponse(t, 404, "Not Found");
-        }
+        } else {Utils.sendResponse(t, 404, "Not Found");}
     }
 
     public static String extract_cell(String query)
