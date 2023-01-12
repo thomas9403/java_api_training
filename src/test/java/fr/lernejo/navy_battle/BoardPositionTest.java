@@ -33,5 +33,11 @@ class BoardPositionTest {
         BoardPosition pos2 = new BoardPosition(1, 2);
         Assertions.assertThat(pos.equals(pos2)).isTrue();
     }
+    @Test
+    void not_equals(){
+        BoardPosition pos = new BoardPosition(1, 2);
+        BoardPosition pos2 = new BoardPosition(1, 3);
+        Assertions.assertThat(pos.equals(pos2)).isFalse();
+    }
 
 }

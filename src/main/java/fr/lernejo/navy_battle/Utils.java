@@ -21,11 +21,6 @@ public class Utils {
         return Character.toString('A' + p.x()) + (p.y() + 1);
     }
 
-    //public static HttpResponse<String> sendGetRequest(String u) throws IOException, InterruptedException {
-    //HttpClient client = HttpClient.newHttpClient();
-    //HttpRequest request = HttpRequest.newBuilder().uri(URI.create(u)).build();
-    //  return client.send(request, HttpResponse.BodyHandlers.ofString());
-    //}
 
     public static HttpResponse<String> GetRequest(String u) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
