@@ -60,4 +60,13 @@ class LauncherTest {
         Assertions.assertThat(Launcher.RandomPos(game)).isNotNull();
     }
 
+    @Test
+    //tester mapper
+    void test_mapper() throws Exception{
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode jsonNode = mapper.readTree("{\"consequence\":\"MISS\", \"shipLeft\":true}");
+        Assertions.assertThat(jsonNode.get("consequence").asText()).isEqualTo("MISS");
+        Assertions.assertThat(jsonNode.get("shipLeft").asBoolean()).isEqualTo(true);
+    }
+
 }
