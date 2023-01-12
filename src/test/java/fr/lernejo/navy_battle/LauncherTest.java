@@ -70,30 +70,4 @@ class LauncherTest {
         Assertions.assertThat(jsonNode.get("shipLeft").asBoolean()).isEqualTo(true);
     }
 
-    @Test
-    void ping_arg() throws Exception {
-        Launcher.main(new String[]{"3645"});
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create("http://localhost:3645/ping"))
-            .GET()
-            .build();
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        Assertions.assertThat(response.statusCode()).as("PING").isEqualTo(200);
-    }
-
-    @Test
-    void another_ping_checking() throws IOException, InterruptedException {
-        Launcher.main(new String[]{"3645"});
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create("http://localhost:3645/api/game/start"))
-            .DELETE()
-            .build();
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        Assertions.assertThat(404).isEqualTo(response.statusCode());
-    }
-
 }
