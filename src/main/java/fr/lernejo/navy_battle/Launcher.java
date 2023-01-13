@@ -20,7 +20,7 @@ public class Launcher {
         Server(game);
         if (args.length == 2) Client(game, args);
         while (!game.is_game_over()) {
-            if (game.get_turn()) new FireProcedure(game);
+            if (game.get_turn()) FireProcedure(game);
             try { Thread.sleep(2500); }
             catch (InterruptedException e) { throw new RuntimeException(e); }
         }
@@ -62,72 +62,20 @@ public class Launcher {
         }
     }
 
-    public static class FireProcedure {
-        private final GameState game;
-        private final int MAX_FIRES = 200;
-        private int firesExchanged;
-
-        public FireProcedure(GameState game) {
-            this.game = game;
-            this.firesExchanged = 0;
-        }
-
-        public void run() throws IOException, InterruptedException {
-            while (!game.is_game_over() && firesExchanged < MAX_FIRES) {
-                BoardPosition targetCell = intelligentFireSelection();
-                String cellAlpha = Utils.translatePosToAlpha(targetCell);
-                HttpResponse<String> response = Utils.GetRequest(game.getOpponentAddress() + "/api/game/fire?cell=" + cellAlpha);
-                ObjectMapper mapper = new ObjectMapper();
-                JsonNode jsonNode = mapper.readTree(response.body());
-                String consequence = jsonNode.get("consequence").asText();
-                boolean shipLeft = jsonNode.get("shipLeft").asBoolean();
-                if (!shipLeft) {
-                    game.set_game_over(true);
-                } else {
-                    game.fireAtCell(targetCell, consequence.equals("hit") || consequence.equals("sunk"));
-                    firesExchanged++;
-                }
-            }
-        }
-
-        private BoardPosition intelligentFireSelection() {
-            double[][] probabilityMap = createProbabilityMap();
-            int maxX = 0;
-            int maxY = 0;
-            double maxProb = 0;
-            for (int x = 0; x < probabilityMap.length; x++) {
-                for (int y = 0; y < probabilityMap[x].length; y++) {
-                    if (probabilityMap[x][y] > maxProb) {
-                        maxProb = probabilityMap[x][y];
-                        maxX = x;
-                        maxY = y;
-                    }
-                }
-            }
-            return new BoardPosition(maxX, maxY);
-        }
-
-        private double[][] createProbabilityMap() {
-            double[][] probabilityMap = new double[10][10];
-            for (int x = 0; x < probabilityMap.length; x++) {
-                for (int y = 0; y < probabilityMap[x].length; y++) {
-                    probabilityMap[x][y] = 0.1;
-                }
-            }
-
-            // Update probabilities based on current game state
-            for (BoardPosition p : game.getHitPositions()) {
-                probabilityMap[p.x()][p.y()] = 0;
-                // Increase probability of surrounding cells
-                for (int x = p.x() - 1; x <= p.x() + 1; x++) {
-                    for (int y = p.y() - 1; y <= p.y() + 1; y++) {
-                        if (x >= 0 && x < 10 && y >= 0 && y < 10) {
-                            probabilityMap[x][y] += 0.1;
-                        }
-                    }
-                }
-            }
-            return probabilityMap;
+    public static void FireProcedure(GameState game) {
+        try {
+            System.out.println("Bonjour a toi !");
+            BoardPosition pos = RandomPos(game);
+            String cellAlpha = Utils.translatePosToAlpha(pos);
+            HttpResponse<String> response = Utils.GetRequest(game.getOpponentAddress() + "/api/game/fire?cell=" + cellAlpha);
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode jsonNode = mapper.readTree(response.body());
+            String consequence = jsonNode.get("consequence").asText();
+            boolean shipLeft = jsonNode.get("shipLeft").asBoolean();
+            if (!shipLeft) game.set_game_over(true);
+            else game.fireAtCell(pos, consequence.equals("hit") || consequence.equals("sunk")).set_turn(false);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
