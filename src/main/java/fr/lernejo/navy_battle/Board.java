@@ -1,7 +1,5 @@
 package fr.lernejo.navy_battle;
 
-import jdk.internal.icu.text.UnicodeSet;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
