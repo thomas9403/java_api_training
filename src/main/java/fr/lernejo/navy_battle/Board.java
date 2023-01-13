@@ -1,14 +1,12 @@
 package fr.lernejo.navy_battle;
 
+import jdk.internal.icu.text.UnicodeSet;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 class Board {
-    public BoardPosition[] getHitPositions() {
-        BoardPosition[] hitPositions = new BoardPosition[0];
-        return hitPositions;
-    }
 
     enum State {FREE, FIRED, HIT}
     enum FireResult {MISS, HIT, SUNK}
