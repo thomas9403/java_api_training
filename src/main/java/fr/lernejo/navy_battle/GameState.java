@@ -74,7 +74,4 @@ public class GameState {
         return this.own_address;
     }
 
-    public BoardPosition[] getHitPositions() {
-        return this.board[0].getHitPositions();
-    }
 }
