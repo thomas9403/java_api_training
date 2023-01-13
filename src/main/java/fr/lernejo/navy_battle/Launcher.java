@@ -72,7 +72,7 @@ public class Launcher {
             JsonNode jsonNode = mapper.readTree(response.body());
             String consequence = jsonNode.get("consequence").asText();
             boolean shipLeft = jsonNode.get("shipLeft").asBoolean();
-            if (!shipLeft) game.set_game_over(true);
+            if (shipLeft) game.set_game_over(true);
             else game.fireAtCell(pos, consequence.equals("hit") || consequence.equals("sunk")).set_turn(false);
         } catch (Exception e) {
             e.printStackTrace();
