@@ -12,7 +12,7 @@ import java.util.Random;
 import java.util.concurrent.Executors;
 
 public class Launcher {
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) {
         if (args.length == 0 || args.length > 2) {
             System.out.println("Listen"); return;
         }
@@ -62,18 +62,20 @@ public class Launcher {
         }
     }
 
-    public static void FireProcedure(GameState game) throws IOException, InterruptedException {
-        System.out.println("Bonjour a toi !");
-        BoardPosition pos = RandomPos(game);
-        String cellAlpha = Utils.translatePosToAlpha(pos);
-        String response = String.valueOf(Utils.GetRequest(game.getOpponentAddress() + "/api/game/fire?cell=" + cellAlpha));
-        JsonNode jsonNode = new ObjectMapper().readTree(response);
-        String consequence = jsonNode.get("consequence").asText();
-        boolean shipLeft = jsonNode.get("shipLeft").asBoolean();
-        if (!shipLeft) {
-            game.set_game_over(true);
-        } else {
-            game.fireAtCell(pos, consequence.equals("hit") || consequence.equals("sunk")).set_turn(false);
+    public static void FireProcedure(GameState game) {
+        try {
+            System.out.println("Bonjour a toi !");
+            BoardPosition pos = RandomPos(game);
+            String cellAlpha = Utils.translatePosToAlpha(pos);
+            HttpResponse<String> response = Utils.GetRequest(game.getOpponentAddress() + "/api/game/fire?cell=" + cellAlpha);
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode jsonNode = mapper.readTree(response.body());
+            String consequence = jsonNode.get("consequence").asText();
+            boolean shipLeft = jsonNode.get("shipLeft").asBoolean();
+            if (!shipLeft) game.set_game_over(true);
+            else game.fireAtCell(pos, consequence.equals("hit") || consequence.equals("sunk")).set_turn(false);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
