@@ -73,4 +73,8 @@ public class GameState {
     public String getOwnAddress() {
         return this.own_address;
     }
+
+    public BoardPosition[] getHitPositions() {
+        return this.board[0].getHitPositions();
+    }
 }
