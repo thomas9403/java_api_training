@@ -74,4 +74,8 @@ public class GameState {
         return this.own_address;
     }
 
+    public int getNbTir() {
+        //maximum 200 tir
+        return this.board[0].getNbTir();
+    }
 }

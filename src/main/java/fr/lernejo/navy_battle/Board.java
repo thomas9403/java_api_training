@@ -6,6 +6,11 @@ import java.util.List;
 
 class Board {
 
+    public int getNbTir() {
+        int nbTir = 200;
+        return nbTir;
+    }
+
     enum State {FREE, FIRED, HIT}
     enum FireResult {MISS, HIT, SUNK}
 
