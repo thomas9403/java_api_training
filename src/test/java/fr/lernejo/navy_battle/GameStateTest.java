@@ -18,11 +18,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameStateTest {
 
-    //public Board.State getPosState(int x, int y) {
-        //if (!this.is_game_over()) return this.board[0].getCellState(x, y);
-      //  return null;
-    //}
-
     @Test
     void test_getPosState(){
         GameState game = new GameState("http://localhost:8080");
@@ -41,17 +36,6 @@ class GameStateTest {
         game.setOpponentAddress("http://localhost:8080");
         Assertions.assertThat(game.getOpponentAddress()).isEqualTo("http://localhost:8080");
     }
-
-    //public String takeFireFromEnemy(int x, int y) {
-        //if (!this.is_game_over()) {
-            //Board.FireResult result = this.board[0].takeFireFromEnemy(new BoardPosition(x, y));
-            //if (result.equals(Board.FireResult.HIT)) {
-              //  return "hit";
-            //} else if (result.equals(Board.FireResult.SUNK)) {
-          //      return "sunk";
-        //    } else return "miss";
-      //  } return "";
-    //}
 
     @Test
     void test_takeFireFromEnemy(){

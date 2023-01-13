@@ -42,8 +42,6 @@ class FireHandlerTest {
         Assertions.assertThat(response).isEqualTo("{\"consequence\": \"hit\", \"shipLeft\": true}");
     }
 
-    //boolean shipLeft = this.game.check_ships_left();
-
     @Test
     void check_ships_left(){
         GameState game = new GameState("http://localhost:1234");
@@ -57,8 +55,6 @@ class FireHandlerTest {
         boolean shipLeft = game.check_ships_left();
         Assertions.assertThat(shipLeft).isEqualTo(true);
     }
-
-    //String consequence = this.game.takeFireFromEnemy(x, y);
 
     @Test
     void takeFireFromEnemy(){

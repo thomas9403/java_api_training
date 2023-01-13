@@ -32,7 +32,6 @@ class LauncherTest {
         });
     }
     @Test
-    //tester GameState game = new GameState("http://localhost:" + Integer.parseInt(args[0]));
     void test_gamestate(){
         GameState game = new GameState("http://localhost:8080");
         Assertions.assertThat(game.getPort()).isEqualTo(8080);

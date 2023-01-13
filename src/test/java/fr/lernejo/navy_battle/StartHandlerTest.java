@@ -24,7 +24,6 @@ class StartHandlerTest {
         server.stop(0);
     }
 
-    //faire un autre test mais erreur 404
     void start_handler_test_404() throws Exception {
         var server = Launcher.Server(new GameState("http://localhost:1234"));
         var client = HttpClient.newHttpClient();
