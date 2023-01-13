@@ -9,12 +9,13 @@ public class Ship {
 
     public Ship(int x, int y, int size, Orientation o) {
         for (int i = 0; i < size; i++) {
+            BoardPosition position;
             if (o == Orientation.HORIZONTAL) {
-                this.occupied.add(new BoardPosition(x + i, y));
+                position = new BoardPosition(x + i, y);
+            } else {
+                position = new BoardPosition(x, y + i);
             }
-            else {
-                this.occupied.add(new BoardPosition(x, y + i));
-            }
+            this.occupied.add(position);
         }
     }
 
